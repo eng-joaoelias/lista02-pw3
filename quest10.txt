@@ -1,0 +1,19 @@
+Qual é o problema com o trecho de código a seguir? E como consertálo?
+// ...
+promise
+.then((data) => console.log(`resultado positivo: ${data}`))
+.then((data) => console.log(`resultado positivo 2: ${data}`))
+.catch((data) => console.log(`resultado negativo: ${data}`));
+``
+
+Resposta: 
+O problema está no segundo then, que para a variável data irá imprimir undefined. Para cada "then", ele recebe como parâmetro o resultado do "then" anterior. Para ajustar, o melhor a se fazer é: 
+promise
+  .then((data) => {
+    console.log(`resultado positivo: ${data}`);
+    return data;
+  })
+  .then((data) => {
+    console.log(`resultado positivo 2: ${data}`);
+  })
+  .catch((data) => console.log(`resultado negativo: ${data}`));
